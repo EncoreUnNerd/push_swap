@@ -12,25 +12,25 @@
 
 #include "ft_printf.h"
 
-static int	cases(char l, va_list args)
+static int	cases(char l, va_list *args)
 {
 	int	res;
 
 	res = 0;
 	if (l == 's')
-		res += ft_putstr(va_arg(args, char *));
+		res += ft_putstr(va_arg(*args, char *));
 	else if (l == 'd' || l == 'i')
-		res += ft_putnbr(va_arg(args, int));
+		res += ft_putnbr(va_arg(*args, int));
 	else if (l == '%')
 		res += ft_putchar('%');
 	else if (l == 'c')
-		res += ft_putchar(va_arg(args, int));
+		res += ft_putchar(va_arg(*args, int));
 	else if (l == 'u')
-		res += ft_putnbr_unsigned(va_arg(args, unsigned int));
+		res += ft_putnbr_unsigned(va_arg(*args, unsigned int));
 	else if (l == 'x' || l == 'X')
-		res += ft_putnbr_base(va_arg(args, unsigned int), l);
+		res += ft_putnbr_base(va_arg(*args, unsigned int), l);
 	else if (l == 'p')
-		res += ft_putnbr_base(va_arg(args, unsigned long), l);
+		res += ft_putnbr_base(va_arg(*args, unsigned long), l);
 	else
 	{
 		res += ft_putchar('%');
@@ -56,7 +56,7 @@ int	ft_printf(const char *format, ...)
 		{
 			format++;
 			if (*format)
-				res += cases(*format, args);
+				res += cases(*format, &args);
 			else
 				break ;
 		}
