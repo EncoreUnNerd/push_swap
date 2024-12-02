@@ -1,31 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   swap_utils2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mhenin <mhenin@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/29 12:31:03 by mhenin            #+#    #+#             */
-/*   Updated: 2024/12/02 16:44:01 by mhenin           ###   ########.fr       */
+/*   Created: 2024/12/02 16:43:06 by mhenin            #+#    #+#             */
+/*   Updated: 2024/12/02 16:51:38 by mhenin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
+#include "push_swap.h"
 
-typedef struct s_stack
+void	swap_swap(t_stack **a, t_stack **b)
 {
-	int		data;
-	struct s_stack *aim;
-	struct s_stack *next;
-}	t_stack;
+	*a = swap(*a);
+	*b = swap(*b);
+}
 
-# include "libft/libft.h"
-# include "ft_printf/ft_printf.h"
+void	rotate_rotate(t_stack **a, t_stack **b)
+{
+	*a = rotate(*a);
+	*b = rotate(*b);
+}
 
-void	push(t_stack **sender, t_stack **receiver);
-t_stack	*reverse_rotate(t_stack *stack);
-t_stack	*rotate(t_stack *stack);
-t_stack	*swap(t_stack *stack);
-
-#endif
+void	reverse_rotate_rotate(t_stack **a, t_stack **b)
+{
+	*a = reverse_rotate(*a);
+	*b = reverse_rotate(*b);
+}

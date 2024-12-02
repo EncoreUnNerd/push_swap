@@ -1,31 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mhenin <mhenin@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/29 12:31:03 by mhenin            #+#    #+#             */
-/*   Updated: 2024/12/02 16:44:01 by mhenin           ###   ########.fr       */
+/*   Created: 2024/12/02 16:36:17 by mhenin            #+#    #+#             */
+/*   Updated: 2024/12/02 16:37:57 by mhenin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
+#include "push_swap.h"
 
-typedef struct s_stack
+t_stack *create_node(int	data)
 {
-	int		data;
-	struct s_stack *aim;
-	struct s_stack *next;
-}	t_stack;
+	t_stack *node;
 
-# include "libft/libft.h"
-# include "ft_printf/ft_printf.h"
+	node = malloc(sizeof(t_stack));
+	if (!node)
+		return (NULL);
+	node->data = data;
+	node->aim = NULL;
+	node->next = NULL;
+	return (node);
+}
 
-void	push(t_stack **sender, t_stack **receiver);
-t_stack	*reverse_rotate(t_stack *stack);
-t_stack	*rotate(t_stack *stack);
-t_stack	*swap(t_stack *stack);
+t_stack	*add_front(t_stack *stack, int data)
+{
+	t_stack	*new;
 
-#endif
+	new = create_node(data);
+	if (!new)
+		return (NULL);
+	new->next = stack;
+	return (new);
+}

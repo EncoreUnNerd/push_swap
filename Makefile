@@ -4,7 +4,7 @@ PRINTF_DIR = ft_printf
 SRCS = push_swap.c
 OBJS = $(SRCS:.c=.o)
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g3
 
 all: $(NAME)
 
@@ -18,8 +18,8 @@ $(PRINTF_DIR)/libftprintf.a:
 	make -C $(PRINTF_DIR)
 
 clean:
-	make clean -C $(LIBFT_DIR)
-	make clean -C $(PRINTF_DIR)
+	make fclean -C $(LIBFT_DIR)
+	make fclean -C $(PRINTF_DIR)
 	rm -f $(OBJS)
 
 fclean: clean
