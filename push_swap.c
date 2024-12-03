@@ -6,52 +6,167 @@
 /*   By: mhenin <mhenin@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 12:31:07 by mhenin            #+#    #+#             */
-/*   Updated: 2024/12/02 16:37:08 by mhenin           ###   ########.fr       */
+/*   Updated: 2024/12/03 18:40:58 by mhenin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	main(void)
+int	where_in_stack(t_stack *position, t_stack *stack)
 {
-	t_stack *a;
-	t_stack *b;
-	t_stack *strt;
+	int	i;
 
+	i = 0;
+	while (stack->data != position->data)
+	{
+		stack = stack->next;
+		i++;
+	}
+	return (i);
+}
+
+int	len_to_top(t_stack *position, t_stack *stack)
+{
+	if (where_in_stack(position, stack) > (stack_len(stack) / 2))
+		return ((stack_len(stack) - where_in_stack(position, stack)) + 1);
+	else
+		return (where_in_stack(position, stack));
+}
+
+t_stack	*biggest_in_stack(t_stack *stack)
+{
+	t_stack	*res;
+
+	res = NULL;
+	while (stack)
+	{
+		if (res == NULL || res->data < stack->data)
+			res = stack;
+		stack = stack->next;
+	}
+	return (res);
+}
+
+t_stack	*find_nearest(t_stack *position, t_stack *stack)
+{
+	t_stack *res;
+	t_stack	*go_top;
+
+	res = NULL;
+	go_top = stack;
+	while (stack)
+	{
+		if (stack->data < position->data)
+		{
+			if (res == NULL || stack->data > res->data)
+				res = stack;
+		}
+		stack = stack->next;
+	}
+	if (res == NULL)
+		res = biggest_in_stack(go_top);
+	return (res);
+}
+
+t_stack	*to_push(t_stack *a, t_stack *b)
+{
+	t_stack	*res;
+	t_stack	*go_top;
+
+	res = NULL;
+	go_top = a;
+	while (a)
+	{
+		a->aim = find_nearest(a, b);
+		a->cost = len_to_top(a, go_top) + len_to_top(a->aim, b);
+		a = a->next;
+	}
+	while (go_top)
+	{
+		if (res == NULL || res->cost > go_top->cost)
+			res = go_top;
+		go_top = res;
+	}
+	return (res);
+}
+
+/* A FAIRE :
+- mettre a jour les truc dans swap_utils pour qu'il mettent bien le previous
+- une fois qu'on a celui a push le mettre en haut de la stack et de meme pour son aim
+- puis push
+*/
+
+// void	sorting(t_stack *a, t_stack *b)
+// {
+// 	int	i;
+
+// 	i = 0;
+// 	while (stack_len(a) > 3)
+// 	{
+// 		if (stack_len(b) < 2)
+// 			push(&a, &b);
+// 		else
+// 		{
+			 
+// 		}
+// 	}
+// }
+
+int	main(int ac, char **av)
+{
+	int 	i;
+	t_stack *a;
+	t_stack	*b;
+
+	a = NULL;
 	b = NULL;
-	a = add_front(NULL ,1);
-	a = add_front(a ,2);
-	a = add_front(a ,3);
-	a = add_front(a ,4);
-	a = add_front(a ,5);
-	a = add_front(a ,6);
-	a = add_front(a ,7);
-	a = add_front(a ,8);
-	a = add_front(a ,9);
-	strt = a;
+	(void)b;
+	i = 1;
+	if (ac <= 1 || check_args_validity(ac, av) == 0)
+		ft_printf("ERROR INVALID ARGS");
+	else
+	{
+		while (i <= ac - 1)
+		{
+			a = add_front(a, ft_atoi(av[i]));
+			i++;
+		}
+	}
 	while (a)
 	{
-		ft_printf("%d", a->data);
-		a = a->next;
+		ft_printf("%i", a->data);
+		if (a->next == NULL)
+			break ;
+		else
+			a = a->next;
 	}
-	a = strt;
-	push(&a, &b);
-	push(&a, &b);
-	push(&a, &b);
-	push(&a, &b);
-	push(&a, &b);
-	push(&a, &b);
-	ft_printf("\n\n");
-	while (b)
+	ft_printf("\n");
+	while (a)
 	{
-		ft_printf("%d",b->data);
-		b = b->next;
+		ft_printf("%i", a->data);
+		if (a->previous != NULL)
+			a = a->previous;
+		else
+			break ;
 	}
+	a = swap(a);
 	ft_printf("\n\n");
 	while (a)
 	{
-		ft_printf("%d",a->data);
-		a = a->next;
+		ft_printf("%i", a->data);
+		if (a->next == NULL)
+			break ;
+		else
+			a = a->next;
 	}
-	return (0);
+	ft_printf("\n");
+	while (a)
+	{
+		ft_printf("%i", a->data);
+		if (a->previous != NULL)
+			a = a->previous;
+		else
+			break ;
+	}
+	// ft_printf("%i", stack_len(a));
 }

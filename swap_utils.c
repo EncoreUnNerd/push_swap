@@ -6,7 +6,7 @@
 /*   By: mhenin <mhenin@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:30:14 by mhenin            #+#    #+#             */
-/*   Updated: 2024/12/02 16:35:21 by mhenin           ###   ########.fr       */
+/*   Updated: 2024/12/03 18:39:12 by mhenin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,11 @@ t_stack	*swap(t_stack *stack)
 	temp = stack;
 	stack = stack->next;
 	temp->next = stack->next;
+	temp->previous = stack;
 	stack->next = temp;
+	stack->previous = NULL;
+	if (temp->next)
+		temp->next->previous = temp;
 	return (stack);
 }
 

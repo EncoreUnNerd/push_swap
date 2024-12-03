@@ -6,7 +6,7 @@
 /*   By: mhenin <mhenin@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 17:24:28 by mhenin            #+#    #+#             */
-/*   Updated: 2024/10/16 20:09:00 by mhenin           ###   ########.fr       */
+/*   Updated: 2024/12/03 16:35:14 by mhenin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 int	ft_atoi(const char *str)
 {
-	int	i;
-	int	signe;
-	int	result;
+	int				i;
+	int				signe;
+	unsigned long	result;
 
 	i = 0;
 	signe = 1;
@@ -34,5 +34,5 @@ int	ft_atoi(const char *str)
 		result = result * 10 + (str[i] - 48);
 		i++;
 	}
-	return (signe * result);
+	return ((int)(signe*result));
 }
