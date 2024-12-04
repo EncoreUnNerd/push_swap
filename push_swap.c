@@ -6,7 +6,7 @@
 /*   By: mhenin <mhenin@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 12:31:07 by mhenin            #+#    #+#             */
-/*   Updated: 2024/12/04 14:26:47 by mhenin           ###   ########.fr       */
+/*   Updated: 2024/12/04 14:39:56 by mhenin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -235,6 +235,7 @@ void	sorting(t_stack *a, t_stack *b)
 	}
 	if (!is_sorted(a))
 		a = bring_top(smallest_in_stack(a), a);
+	tmp = a;
 	while (a)
 	{
 		ft_printf("%i ", a->data);
@@ -243,7 +244,7 @@ void	sorting(t_stack *a, t_stack *b)
 		else
 			a = a->next;
 	}
-	free_all_nodes(a);
+	free_all_nodes(tmp);
 }
 
 int	main(int ac, char **av)
