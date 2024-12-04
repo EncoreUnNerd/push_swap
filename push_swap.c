@@ -6,11 +6,23 @@
 /*   By: mhenin <mhenin@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 12:31:07 by mhenin            #+#    #+#             */
-/*   Updated: 2024/12/04 11:53:11 by mhenin           ###   ########.fr       */
+/*   Updated: 2024/12/04 14:26:47 by mhenin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+void free_all_nodes(t_stack *stack)
+{
+	t_stack	*tmp;
+
+	while (stack)
+	{
+		tmp = stack;
+		stack = stack->next;
+		free(tmp);
+	}
+}
 
 int	where_in_stack(t_stack *position, t_stack *stack)
 {
@@ -231,6 +243,7 @@ void	sorting(t_stack *a, t_stack *b)
 		else
 			a = a->next;
 	}
+	free_all_nodes(a);
 }
 
 int	main(int ac, char **av)
@@ -252,34 +265,6 @@ int	main(int ac, char **av)
 			a = add_front(a, ft_atoi(av[i]));
 			i++;
 		}
+		sorting(a, b);
 	}
-	// while (a)
-	// {
-	// 	ft_printf("%i", a->data);
-	// 	if (a->next == NULL)
-	// 		break ;
-	// 	else
-	// 		a = a->next;
-	// }
-	// ft_printf("\n");
-	// while (a)
-	// {
-	// 	ft_printf("%i", a->data);
-	// 	if (a->previous != NULL)
-	// 		a = a->previous;
-	// 	else
-	// 		break ;
-	// }
-	// ft_printf("\n[%i]", a->next->next->next->next->next->next->next->next->data);
-	// a = bring_top(a->next->next->next->next->next->next->next->next, a);
-	// ft_printf("\n");
-	// while (a)
-	// {
-	// 	ft_printf("%i", a->data);
-	// 	if (a->next == NULL)
-	// 		break ;
-	// 	else
-	// 		a = a->next;
-	// }
-	sorting(a, b);
 }
