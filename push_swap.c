@@ -6,204 +6,11 @@
 /*   By: mhenin <mhenin@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 12:31:07 by mhenin            #+#    #+#             */
-/*   Updated: 2024/12/04 14:49:20 by mhenin           ###   ########.fr       */
+/*   Updated: 2024/12/04 16:31:42 by mhenin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-void free_all_nodes(t_stack *stack)
-{
-	t_stack	*tmp;
-
-	while (stack)
-	{
-		tmp = stack;
-		stack = stack->next;
-		free(tmp);
-	}
-}
-
-int	where_in_stack(t_stack *position, t_stack *stack)
-{
-	int	i;
-
-	i = 0;
-	while (stack->data != position->data)
-	{
-		stack = stack->next;
-		i++;
-	}
-	return (i);
-}
-
-int	len_to_top(t_stack *position, t_stack *stack)
-{
-	if (where_in_stack(position, stack) > (stack_len(stack) / 2))
-		return (stack_len(stack) - where_in_stack(position, stack));
-	else
-		return (where_in_stack(position, stack));
-}
-
-t_stack	*biggest_in_stack(t_stack *stack)
-{
-	t_stack	*res;
-
-	res = NULL;
-	while (stack)
-	{
-		if (res == NULL || res->data < stack->data)
-			res = stack;
-		stack = stack->next;
-	}
-	return (res);
-}
-
-t_stack	*smallest_in_stack(t_stack *stack)
-{
-	t_stack	*res;
-
-	res = NULL;
-	while (stack)
-	{
-		if (res == NULL || res->data > stack->data)
-			res = stack;
-		stack = stack->next;
-	}
-	return (res);
-}
-
-t_stack	*find_nearest_l(t_stack *position, t_stack *stack)
-{
-	t_stack *res;
-	t_stack	*go_top;
-
-	res = NULL;
-	go_top = stack;
-	while (stack)
-	{
-		if (stack->data < position->data)
-		{
-			if (res == NULL || stack->data > res->data)
-				res = stack;
-		}
-		stack = stack->next;
-	}
-	if (res == NULL)
-		res = biggest_in_stack(go_top);
-	return (res);
-}
-
-t_stack	*find_nearest_b(t_stack *position, t_stack *stack)
-{
-	t_stack *res;
-	t_stack	*go_top;
-
-	res = NULL;
-	go_top = stack;
-	while (stack)
-	{
-		if (stack->data > position->data)
-		{
-			if (res == NULL || stack->data < res->data)
-				res = stack;
-		}
-		stack = stack->next;
-	}
-	if (res == NULL)
-		res = smallest_in_stack(go_top);
-	return (res);
-}
-
-t_stack	*to_push_l(t_stack *stack_s, t_stack *stack_r)
-{
-	t_stack	*res;
-	t_stack	*go_top;
-
-	res = NULL;
-	go_top = stack_s;
-	while (stack_s)
-	{
-		stack_s->aim = find_nearest_l(stack_s, stack_r);
-		stack_s->cost = len_to_top(stack_s, go_top) + len_to_top(stack_s->aim, stack_r);
-		stack_s = stack_s->next;
-	}
-	while (go_top)
-	{
-		if (res == NULL || res->cost > go_top->cost)
-			res = go_top;
-		go_top = go_top->next;
-	}
-	return (res);
-}
-
-t_stack	*to_push_b(t_stack *stack_s, t_stack *stack_r)
-{
-	t_stack	*res;
-	t_stack	*go_top;
-
-	res = NULL;
-	go_top = stack_s;
-	while (stack_s)
-	{
-		stack_s->aim = find_nearest_b(stack_s, stack_r);
-		stack_s->cost = len_to_top(stack_s, go_top) + len_to_top(stack_s->aim, stack_r);
-		stack_s = stack_s->next;
-	}
-	while (go_top)
-	{
-		if (res == NULL || res->cost > go_top->cost)
-			res = go_top;
-		go_top = go_top->next;
-	}
-	return (res);
-}
-
-t_stack	*bring_top(t_stack *position, t_stack *stack, int l)
-{
-	int	i;
-	int e;
-
-	i = 0;
-	if (where_in_stack(position, stack) > (stack_len(stack) / 2))
-	{
-		e = len_to_top(position, stack);
-		while (i < e)
-		{
-			stack = reverse_rotate(stack, l);
-			i++;
-		}
-	}
-	else
-	{
-		e = len_to_top(position, stack);
-		while (i < e)
-		{
-			stack = rotate(stack, l);
-			i++;
-		}
-	}
-	return(stack);
-}
-
-t_stack	*bring_to_bottom(t_stack *position, t_stack *stack, int l)
-{
-	while (where_in_stack(position, stack) != stack_len(stack) - 1)
-		stack = reverse_rotate(stack, l);
-	return (stack);
-}
-
-int is_sorted(t_stack *stack)
-{
-	while (stack)
-	{
-		if (stack->previous == NULL || stack->previous->data < stack->data)
-			stack = stack->next;
-		else
-			return (0);
-	}
-	return (1);
-}
 
 void	sorting(t_stack *a, t_stack *b)
 {
@@ -235,8 +42,7 @@ void	sorting(t_stack *a, t_stack *b)
 	}
 	if (!is_sorted(a))
 		a = bring_top(smallest_in_stack(a), a, 1);
-	tmp = a;
-	free_all_nodes(tmp);
+	free_all_nodes(a);
 }
 
 int	main(int ac, char **av)
@@ -247,7 +53,6 @@ int	main(int ac, char **av)
 
 	a = NULL;
 	b = NULL;
-	(void)b;
 	i = 1;
 	if (ac <= 1 || check_args_validity(ac, av) == 0)
 		ft_printf("ERROR INVALID ARGS");
@@ -255,7 +60,7 @@ int	main(int ac, char **av)
 	{
 		while (i <= ac - 1)
 		{
-			a = add_front(a, ft_atoi(av[i]));
+			a = add_back(a, ft_atoi(av[i]));
 			i++;
 		}
 		sorting(a, b);

@@ -6,7 +6,7 @@
 /*   By: mhenin <mhenin@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:36:17 by mhenin            #+#    #+#             */
-/*   Updated: 2024/12/04 10:34:58 by mhenin           ###   ########.fr       */
+/*   Updated: 2024/12/04 16:24:22 by mhenin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,17 +27,25 @@ static t_stack *create_node(int data)
 	return (node);
 }
 
-t_stack	*add_front(t_stack *stack, int data)
+t_stack	*add_back(t_stack *stack, int data)
 {
 	t_stack	*new;
+	t_stack	*go_top;
 
+	go_top = stack;
 	new = create_node(data);
 	if (!new)
 		return (NULL);
-	new->next = stack;
 	if (stack)
-		stack->previous = new;
-	return (new);
+	{
+		while (stack->next)
+			stack = stack->next;
+		stack->next = new;
+		new->previous = stack;
+	}
+	else
+		go_top = new;
+	return (go_top);
 }
 
 int	verif_atoi(const char *str)
@@ -70,6 +78,18 @@ int	check_args_validity(int number, char **value)
 		if (verif_atoi(value[i]) == 0)
 			return (0);
 		i++;
+	}
+	return (1);
+}
+
+int is_sorted(t_stack *stack)
+{
+	while (stack)
+	{
+		if (stack->previous == NULL || stack->previous->data < stack->data)
+			stack = stack->next;
+		else
+			return (0);
 	}
 	return (1);
 }
