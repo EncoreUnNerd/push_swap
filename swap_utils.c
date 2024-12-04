@@ -6,7 +6,7 @@
 /*   By: mhenin <mhenin@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:30:14 by mhenin            #+#    #+#             */
-/*   Updated: 2024/12/03 18:39:12 by mhenin           ###   ########.fr       */
+/*   Updated: 2024/12/04 10:34:56 by mhenin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ t_stack	*swap(t_stack *stack)
 	return (stack);
 }
 
-t_stack	*rotate(t_stack *stack)
+t_stack	*reverse_rotate(t_stack *stack)
 {
 	t_stack	*start;
 	t_stack	*tmp;
@@ -45,10 +45,12 @@ t_stack	*rotate(t_stack *stack)
 	}
 	tmp->next = NULL;
 	stack->next = start;
+	start->previous = stack;
+	stack->previous = NULL;
 	return (stack);
 }
 
-t_stack	*reverse_rotate(t_stack *stack)
+t_stack	*rotate(t_stack *stack)
 {
 	t_stack	*temp;
 	t_stack *start;
@@ -58,11 +60,11 @@ t_stack	*reverse_rotate(t_stack *stack)
 	start = stack;
 	temp = stack->next;
 	while (stack->next)
-	{
 		stack = stack->next;
-	}
 	stack->next = start;
 	start->next = NULL;
+	start->previous = stack;
+	temp->previous = NULL;
 	return (temp);
 }
 
@@ -72,6 +74,10 @@ void	push(t_stack **sender, t_stack **receiver)
 
 	temp = *sender;
 	*sender = (*sender)->next;
+	if (*sender)
+		(*sender)->previous = NULL;
 	temp->next = *receiver;
+	if (*receiver)
+		(*receiver)->previous = temp;
 	*receiver = temp;
 }
