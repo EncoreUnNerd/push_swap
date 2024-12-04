@@ -6,7 +6,7 @@
 /*   By: mhenin <mhenin@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 12:31:07 by mhenin            #+#    #+#             */
-/*   Updated: 2024/12/04 14:39:56 by mhenin           ###   ########.fr       */
+/*   Updated: 2024/12/04 14:49:20 by mhenin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,7 +159,7 @@ t_stack	*to_push_b(t_stack *stack_s, t_stack *stack_r)
 	return (res);
 }
 
-t_stack	*bring_top(t_stack *position, t_stack *stack)
+t_stack	*bring_top(t_stack *position, t_stack *stack, int l)
 {
 	int	i;
 	int e;
@@ -170,7 +170,7 @@ t_stack	*bring_top(t_stack *position, t_stack *stack)
 		e = len_to_top(position, stack);
 		while (i < e)
 		{
-			stack = reverse_rotate(stack);
+			stack = reverse_rotate(stack, l);
 			i++;
 		}
 	}
@@ -179,17 +179,17 @@ t_stack	*bring_top(t_stack *position, t_stack *stack)
 		e = len_to_top(position, stack);
 		while (i < e)
 		{
-			stack = rotate(stack);
+			stack = rotate(stack, l);
 			i++;
 		}
 	}
 	return(stack);
 }
 
-t_stack	*bring_to_bottom(t_stack *position, t_stack *stack)
+t_stack	*bring_to_bottom(t_stack *position, t_stack *stack, int l)
 {
 	while (where_in_stack(position, stack) != stack_len(stack) - 1)
-		stack = reverse_rotate(stack);
+		stack = reverse_rotate(stack, l);
 	return (stack);
 }
 
@@ -212,38 +212,30 @@ void	sorting(t_stack *a, t_stack *b)
 	while (stack_len(a) > 3)
 	{
 		if (stack_len(b) < 2)
-			push(&a, &b);
+			push(&a, &b, 0);
 		else
 		{
 			tmp = to_push_l(a, b);
-			a = bring_top(tmp, a);
-			b = bring_top(tmp->aim, b);
-			push(&a, &b);
+			a = bring_top(tmp, a, 1);
+			b = bring_top(tmp->aim, b, 0);
+			push(&a, &b, 0);
 		}
 	}
 	tmp = biggest_in_stack(a);
 	if (where_in_stack(tmp, a) != stack_len(a) - 1)
-		a = bring_to_bottom(tmp, a);
+		a = bring_to_bottom(tmp, a, 1);
 	if (!is_sorted(a))
-		a = swap(a);
+		a = swap(a, 1);
 	while (b)
 	{
 		tmp = to_push_b(b, a);
-		b = bring_top(tmp, b);
-		a = bring_top(tmp->aim, a);
-		push(&b, &a);
+		b = bring_top(tmp, b, 0);
+		a = bring_top(tmp->aim, a, 1);
+		push(&b, &a, 1);
 	}
 	if (!is_sorted(a))
-		a = bring_top(smallest_in_stack(a), a);
+		a = bring_top(smallest_in_stack(a), a, 1);
 	tmp = a;
-	while (a)
-	{
-		ft_printf("%i ", a->data);
-		if (a->next == NULL)
-			break ;
-		else
-			a = a->next;
-	}
 	free_all_nodes(tmp);
 }
 
