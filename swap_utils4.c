@@ -6,7 +6,7 @@
 /*   By: mhenin <mhenin@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 16:28:45 by mhenin            #+#    #+#             */
-/*   Updated: 2024/12/04 16:29:17 by mhenin           ###   ########.fr       */
+/*   Updated: 2024/12/05 18:27:47 by mhenin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,4 +59,17 @@ t_stack	*smallest_in_stack(t_stack *stack)
 		stack = stack->next;
 	}
 	return (res);
+}
+
+int	stack_len(t_stack *a)
+{
+	int i;
+
+	i = 0;
+	while (a)
+	{
+		i++;
+		a = a->next;
+	}
+	return (i);
 }

@@ -6,15 +6,15 @@
 /*   By: mhenin <mhenin@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:36:17 by mhenin            #+#    #+#             */
-/*   Updated: 2024/12/04 16:24:22 by mhenin           ###   ########.fr       */
+/*   Updated: 2024/12/05 18:28:49 by mhenin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static t_stack *create_node(int data)
+static t_stack	*create_node(int data)
 {
-	t_stack *node;
+	t_stack	*node;
 
 	node = malloc(sizeof(t_stack));
 	if (!node)
@@ -70,7 +70,7 @@ int	verif_atoi(const char *str)
 
 int	check_args_validity(int number, char **value)
 {
-	int i;
+	int	i;
 
 	i = 1;
 	while (i <= number - 1)
@@ -82,7 +82,7 @@ int	check_args_validity(int number, char **value)
 	return (1);
 }
 
-int is_sorted(t_stack *stack)
+int	is_sorted(t_stack *stack)
 {
 	while (stack)
 	{

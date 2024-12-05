@@ -6,7 +6,7 @@
 /*   By: mhenin <mhenin@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:43:06 by mhenin            #+#    #+#             */
-/*   Updated: 2024/12/04 16:34:54 by mhenin           ###   ########.fr       */
+/*   Updated: 2024/12/05 18:27:35 by mhenin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ t_stack	*bring_to_bottom(t_stack *position, t_stack *stack, int l)
 t_stack	*bring_top(t_stack *position, t_stack *stack, int l)
 {
 	int	i;
-	int e;
+	int	e;
 
 	i = 0;
 	if (where_in_stack(position, stack) > (stack_len(stack) / 2))
@@ -61,18 +61,5 @@ t_stack	*bring_top(t_stack *position, t_stack *stack, int l)
 			i++;
 		}
 	}
-	return(stack);
-}
-
-int	stack_len(t_stack *a)
-{
-	int i;
-
-	i = 0;
-	while (a)
-	{
-		i++;
-		a = a->next;
-	}
-	return (i);
+	return (stack);
 }

@@ -6,7 +6,7 @@
 /*   By: mhenin <mhenin@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 17:24:28 by mhenin            #+#    #+#             */
-/*   Updated: 2024/12/03 16:35:14 by mhenin           ###   ########.fr       */
+/*   Updated: 2024/12/05 18:36:34 by mhenin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,5 @@ int	ft_atoi(const char *str)
 		result = result * 10 + (str[i] - 48);
 		i++;
 	}
-	return ((int)(signe*result));
+	return ((int)(signe * result));
 }

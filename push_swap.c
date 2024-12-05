@@ -6,7 +6,7 @@
 /*   By: mhenin <mhenin@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 12:31:07 by mhenin            #+#    #+#             */
-/*   Updated: 2024/12/04 16:31:42 by mhenin           ###   ########.fr       */
+/*   Updated: 2024/12/05 18:35:18 by mhenin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@ void	sorting(t_stack *a, t_stack *b)
 
 int	main(int ac, char **av)
 {
-	int 	i;
-	t_stack *a;
+	int		i;
+	t_stack	*a;
 	t_stack	*b;
 
 	a = NULL;

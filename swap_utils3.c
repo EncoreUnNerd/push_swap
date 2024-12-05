@@ -6,7 +6,7 @@
 /*   By: mhenin <mhenin@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 16:25:38 by mhenin            #+#    #+#             */
-/*   Updated: 2024/12/04 16:28:26 by mhenin           ###   ########.fr       */
+/*   Updated: 2024/12/05 18:31:52 by mhenin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ t_stack	*to_push_l(t_stack *stack_s, t_stack *stack_r)
 	while (stack_s)
 	{
 		stack_s->aim = find_nearest_l(stack_s, stack_r);
-		stack_s->cost = len_to_top(stack_s, go_top) + len_to_top(stack_s->aim, stack_r);
+		stack_s->cost = len_to_top(stack_s, go_top) \
+						+ len_to_top(stack_s->aim, stack_r);
 		stack_s = stack_s->next;
 	}
 	while (go_top)
@@ -44,7 +45,8 @@ t_stack	*to_push_b(t_stack *stack_s, t_stack *stack_r)
 	while (stack_s)
 	{
 		stack_s->aim = find_nearest_b(stack_s, stack_r);
-		stack_s->cost = len_to_top(stack_s, go_top) + len_to_top(stack_s->aim, stack_r);
+		stack_s->cost = len_to_top(stack_s, go_top) \
+						+ len_to_top(stack_s->aim, stack_r);
 		stack_s = stack_s->next;
 	}
 	while (go_top)
@@ -58,7 +60,7 @@ t_stack	*to_push_b(t_stack *stack_s, t_stack *stack_r)
 
 t_stack	*find_nearest_l(t_stack *position, t_stack *stack)
 {
-	t_stack *res;
+	t_stack	*res;
 	t_stack	*go_top;
 
 	res = NULL;
@@ -79,7 +81,7 @@ t_stack	*find_nearest_l(t_stack *position, t_stack *stack)
 
 t_stack	*find_nearest_b(t_stack *position, t_stack *stack)
 {
-	t_stack *res;
+	t_stack	*res;
 	t_stack	*go_top;
 
 	res = NULL;
@@ -98,7 +100,7 @@ t_stack	*find_nearest_b(t_stack *position, t_stack *stack)
 	return (res);
 }
 
-void free_all_nodes(t_stack *stack)
+void	free_all_nodes(t_stack *stack)
 {
 	t_stack	*tmp;
 
