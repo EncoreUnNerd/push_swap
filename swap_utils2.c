@@ -6,7 +6,7 @@
 /*   By: mhenin <mhenin@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:43:06 by mhenin            #+#    #+#             */
-/*   Updated: 2024/12/05 18:27:35 by mhenin           ###   ########.fr       */
+/*   Updated: 2024/12/06 12:26:50 by mhenin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,37 @@
 
 void	swap_swap(t_stack **a, t_stack **b)
 {
-	*a = swap(*a, 1);
-	*b = swap(*b, 2);
+	ft_printf("ss\n");
+	*a = swap_r(*a);
+	*b = swap_r(*b);
 }
 
 void	rotate_rotate(t_stack **a, t_stack **b)
 {
-	*a = rotate(*a, 1);
-	*b = rotate(*b, 2);
+	ft_printf("rr\n");
+	*a = rotate_r(*a);
+	*b = rotate_r(*b);
 }
 
 void	reverse_rotate_rotate(t_stack **a, t_stack **b)
 {
-	*a = reverse_rotate(*a, 1);
-	*b = reverse_rotate(*b, 2);
+	ft_printf("rrr\n");
+	*a = reverse_rotate_r(*a);
+	*b = reverse_rotate_r(*b);
 }
 
 t_stack	*bring_to_bottom(t_stack *position, t_stack *stack, int l)
 {
-	while (where_in_stack(position, stack) != stack_len(stack) - 1)
-		stack = reverse_rotate(stack, l);
+	if (down_or_up(position, stack) == 0)
+	{
+		while (where_in_stack(position, stack) != stack_len(stack) - 1)
+			stack = reverse_rotate(stack, l);
+	}
+	else
+	{
+		while (where_in_stack(position, stack) != stack_len(stack) - 1)
+			stack = rotate(stack, l);
+	}
 	return (stack);
 }
 
@@ -43,7 +54,7 @@ t_stack	*bring_top(t_stack *position, t_stack *stack, int l)
 	int	e;
 
 	i = 0;
-	if (where_in_stack(position, stack) > (stack_len(stack) / 2))
+	if (down_or_up(position, stack) == 1)
 	{
 		e = len_to_top(position, stack);
 		while (i < e)

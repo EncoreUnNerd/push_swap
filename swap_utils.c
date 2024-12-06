@@ -6,20 +6,16 @@
 /*   By: mhenin <mhenin@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:30:14 by mhenin            #+#    #+#             */
-/*   Updated: 2024/12/05 18:26:30 by mhenin           ###   ########.fr       */
+/*   Updated: 2024/12/06 13:02:35 by mhenin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-t_stack	*swap(t_stack *stack, int l)
+t_stack	*swap_r(t_stack *stack)
 {
 	t_stack	*temp;
 
-	if (l == 1)
-		ft_printf("sa\n");
-	else
-		ft_printf("sb\n");
 	if (!stack || !stack->next)
 		return (stack);
 	temp = stack;
@@ -33,15 +29,11 @@ t_stack	*swap(t_stack *stack, int l)
 	return (stack);
 }
 
-t_stack	*reverse_rotate(t_stack *stack, int l)
+t_stack	*reverse_rotate_r(t_stack *stack)
 {
 	t_stack	*start;
 	t_stack	*tmp;
 
-	if (l == 1)
-		ft_printf("rra\n");
-	else
-		ft_printf("rrb\n");
 	if (!stack || !stack->next)
 		return (stack);
 	start = stack;
@@ -57,15 +49,11 @@ t_stack	*reverse_rotate(t_stack *stack, int l)
 	return (stack);
 }
 
-t_stack	*rotate(t_stack *stack, int l)
+t_stack	*rotate_r(t_stack *stack)
 {
 	t_stack	*temp;
 	t_stack	*start;
 
-	if (l == 1)
-		ft_printf("ra\n");
-	else
-		ft_printf("rb\n");
 	if (!stack || !stack->next)
 		return (stack);
 	start = stack;
@@ -95,4 +83,16 @@ void	push(t_stack **sender, t_stack **receiver, int l)
 	if (*receiver)
 		(*receiver)->previous = temp;
 	*receiver = temp;
+}
+
+int	is_sorted(t_stack *stack)
+{
+	while (stack)
+	{
+		if (stack->previous == NULL || stack->previous->data < stack->data)
+			stack = stack->next;
+		else
+			return (0);
+	}
+	return (1);
 }

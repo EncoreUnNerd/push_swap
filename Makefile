@@ -1,7 +1,8 @@
 NAME = push_swap
 LIBFT_DIR = libft
 PRINTF_DIR = ft_printf
-SRCS = push_swap.c swap_utils.c swap_utils2.c swap_utils3.c swap_utils4.c utils.c
+SRCS = push_swap.c swap_utils.c swap_utils2.c swap_utils3.c \
+	swap_utils4.c swap_utils5.c swap_utils6.c utils.c
 OBJS = $(SRCS:.c=.o)
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -g3

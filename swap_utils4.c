@@ -6,7 +6,7 @@
 /*   By: mhenin <mhenin@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 16:28:45 by mhenin            #+#    #+#             */
-/*   Updated: 2024/12/05 18:27:47 by mhenin           ###   ########.fr       */
+/*   Updated: 2024/12/06 13:34:02 by mhenin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	where_in_stack(t_stack *position, t_stack *stack)
 
 int	len_to_top(t_stack *position, t_stack *stack)
 {
-	if (where_in_stack(position, stack) > (stack_len(stack) / 2))
+	if (down_or_up(position, stack) == 1)
 		return (stack_len(stack) - where_in_stack(position, stack));
 	else
 		return (where_in_stack(position, stack));
@@ -63,7 +63,7 @@ t_stack	*smallest_in_stack(t_stack *stack)
 
 int	stack_len(t_stack *a)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (a)
