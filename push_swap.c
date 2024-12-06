@@ -6,7 +6,7 @@
 /*   By: mhenin <mhenin@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 12:31:07 by mhenin            #+#    #+#             */
-/*   Updated: 2024/12/06 13:32:40 by mhenin           ###   ########.fr       */
+/*   Updated: 2024/12/06 17:18:35 by mhenin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,11 +104,19 @@ int	main(int ac, char **av)
 	a = NULL;
 	b = NULL;
 	if (ac <= 1 || check_args_validity(ac, av) == 0)
-		ft_printf("ERROR INVALID ARGS");
+		ft_printf("ERROR");
 	else
 	{
 		add_nodes(ac, av, &a);
-		if (!is_sorted(a))
+		if (check_doublons(a))
+		{
+			ft_printf("ERROR");
+			free_all_nodes(a);
+		}
+		else if (is_sorted(a))
+			free_all_nodes(a);
+		else
 			sorting(a, b);
 	}
+	return (0);
 }

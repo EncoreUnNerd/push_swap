@@ -6,7 +6,7 @@
 /*   By: mhenin <mhenin@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 12:31:03 by mhenin            #+#    #+#             */
-/*   Updated: 2024/12/06 13:33:23 by mhenin           ###   ########.fr       */
+/*   Updated: 2024/12/06 17:09:18 by mhenin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,5 +54,6 @@ int		len_to_top(t_stack *position, t_stack *stack);
 int		is_sorted(t_stack *stack);
 int		down_or_up(t_stack *position, t_stack *stack);
 int		check_if_on_top(t_stack *position, t_stack *stack);
+int		check_doublons(t_stack *stack);
 
 #endif
