@@ -6,7 +6,7 @@
 /*   By: mhenin <mhenin@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 12:31:07 by mhenin            #+#    #+#             */
-/*   Updated: 2024/12/12 14:37:31 by mhenin           ###   ########.fr       */
+/*   Updated: 2024/12/12 17:21:54 by mhenin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ void	add_nodes(int ac, char **av, t_stack **a)
 		if (b == NULL)
 		{
 			free_all_nodes(*a);
-			ft_printf("ERROR ALLOCATING NODES");
+			write(2, "Error\n", 6);
 			exit(-1);
 		}
 		*a = b;
@@ -106,13 +106,13 @@ int	main(int ac, char **av)
 	if (ac <= 1)
 		return (0);
 	else if (check_args_validity(ac, av) == 0)
-		ft_printf("ERROR");
+		write(2, "Error\n", 6);
 	else
 	{
 		add_nodes(ac, av, &a);
 		if (check_doublons(a))
 		{
-			ft_printf("ERROR");
+			write(2, "Error\n", 6);
 			free_all_nodes(a);
 		}
 		else if (is_sorted(a))
