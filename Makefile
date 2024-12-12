@@ -25,18 +25,18 @@ $(NAME): $(OBJS_UTILITIES) $(OBJS) $(LIBFT_DIR)/libft.a $(PRINTF_DIR)/libftprint
 	@printf "push_swap compiled ✅\n"
 
 $(LIBFT_DIR)/libft.a:
-	@make -C $(LIBFT_DIR)
+	@make -sC $(LIBFT_DIR)
 
 $(PRINTF_DIR)/libftprintf.a:
-	@make -C $(PRINTF_DIR)
+	@make -sC $(PRINTF_DIR)
 
 .c.o:
 	@$(CC) $(CFLAGS) -c $< -o $@
 	@printf "."
 
 clean:
-	@make fclean -C $(LIBFT_DIR)
-	@make fclean -C $(PRINTF_DIR)
+	@make fclean -sC $(LIBFT_DIR)
+	@make fclean -sC $(PRINTF_DIR)
 	@rm -f $(OBJS_UTILITIES)
 	@rm -f $(OBJS)
 	@printf "cleaned 🧹\n"
