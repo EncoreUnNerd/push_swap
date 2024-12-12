@@ -6,7 +6,7 @@
 /*   By: mhenin <mhenin@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 12:31:07 by mhenin            #+#    #+#             */
-/*   Updated: 2024/12/12 11:54:49 by mhenin           ###   ########.fr       */
+/*   Updated: 2024/12/12 14:37:31 by mhenin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,9 @@ int	main(int ac, char **av)
 
 	a = NULL;
 	b = NULL;
-	if (ac <= 1 || check_args_validity(ac, av) == 0)
+	if (ac <= 1)
+		return (0);
+	else if (check_args_validity(ac, av) == 0)
 		ft_printf("ERROR");
 	else
 	{
