@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   swap_utils3.c                                      :+:      :+:    :+:   */
+/*   stack_push_operations.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mhenin <mhenin@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 16:25:38 by mhenin            #+#    #+#             */
-/*   Updated: 2024/12/06 11:21:11 by mhenin           ###   ########.fr       */
+/*   Updated: 2024/12/12 11:34:42 by mhenin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../push_swap.h"
 
 t_stack	*to_push_l(t_stack *stack_s, t_stack *stack_r)
 {

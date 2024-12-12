@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   swap_utils4.c                                      :+:      :+:    :+:   */
+/*   stack_utilities.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mhenin <mhenin@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 16:28:45 by mhenin            #+#    #+#             */
-/*   Updated: 2024/12/06 13:34:02 by mhenin           ###   ########.fr       */
+/*   Updated: 2024/12/12 11:34:49 by mhenin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../push_swap.h"
 
 int	where_in_stack(t_stack *position, t_stack *stack)
 {

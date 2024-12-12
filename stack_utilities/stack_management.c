@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   swap_utils6.c                                      :+:      :+:    :+:   */
+/*   stack_management.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mhenin <mhenin@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 13:32:49 by mhenin            #+#    #+#             */
-/*   Updated: 2024/12/06 17:15:38 by mhenin           ###   ########.fr       */
+/*   Updated: 2024/12/12 11:34:31 by mhenin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../push_swap.h"
 
 void	move_top_separely(t_stack **s1, t_stack **s2, t_stack *p, int e[2])
 {

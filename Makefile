@@ -1,32 +1,48 @@
 NAME = push_swap
+
 LIBFT_DIR = libft
 PRINTF_DIR = ft_printf
-SRCS = push_swap.c swap_utils.c swap_utils2.c swap_utils3.c \
-	swap_utils4.c swap_utils5.c swap_utils6.c utils.c
+
+SRCS = push_swap.c
+SRCS_UTILITIES = stack_utilities/advanced_stack_operations.c \
+				stack_utilities/stack_initialization.c \
+				stack_utilities/stack_management.c \
+				stack_utilities/stack_operations_helper.c \
+				stack_utilities/stack_operations.c \
+				stack_utilities/stack_utilities.c \
+				stack_utilities/stack_push_operations.c
+
 OBJS = $(SRCS:.c=.o)
+OBJS_UTILITIES = $(SRCS_UTILITIES:.c=.o)
+
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g3
+CFLAGS = -Wall -Wextra -Werror
 
 all: $(NAME)
 
-$(NAME): $(OBJS) $(LIBFT_DIR)/libft.a $(PRINTF_DIR)/libftprintf.a
-	$(CC) $(CFLAGS) -o $@ $^ 
+$(NAME): $(OBJS_UTILITIES) $(OBJS) $(LIBFT_DIR)/libft.a $(PRINTF_DIR)/libftprintf.a
+	@$(CC) $(CFLAGS) -o $@ $^
+	@printf "push_swap compiled ✅\n"
 
 $(LIBFT_DIR)/libft.a:
-	make -C $(LIBFT_DIR)
+	@make -C $(LIBFT_DIR)
 
 $(PRINTF_DIR)/libftprintf.a:
-	make -C $(PRINTF_DIR)
+	@make -C $(PRINTF_DIR)
+
+.c.o:
+	@$(CC) $(CFLAGS) -c $< -o $@
+	@printf "."
 
 clean:
-	make fclean -C $(LIBFT_DIR)
-	make fclean -C $(PRINTF_DIR)
-	rm -f $(OBJS)
+	@make fclean -C $(LIBFT_DIR)
+	@make fclean -C $(PRINTF_DIR)
+	@rm -f $(OBJS_UTILITIES)
+	@rm -f $(OBJS)
+	@printf "cleaned 🧹\n"
 
 fclean: clean
-	make fclean -C $(LIBFT_DIR)
-	make fclean -C $(PRINTF_DIR)
-	rm -f $(NAME)
+	@rm -f $(NAME)
 
 re: fclean all
 
