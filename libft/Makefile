@@ -17,19 +17,15 @@ all : $(NAME)
 
 $(NAME) : $(OBJS)
 	@ar rcs $(NAME) $(OBJS)
-	@printf "libft compiled ✅\n"
 
 %.o: %.c
 	@$(CC) $(CFLAGS) -c $< -o $@
-	@printf "."
 
 clean:
 	@rm -f $(OBJS)
-	@printf "."
 
 fclean: clean
 	@rm -f $(NAME)
-	@printf "."
 
 re: fclean all
 

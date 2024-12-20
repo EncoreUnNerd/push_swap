@@ -18,31 +18,41 @@ OBJS_UTILITIES = $(SRCS_UTILITIES:.c=.o)
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 
+GREEN = \033[32m
+BLUE = \033[34m
+RESET = \033[0m
+
 all: $(NAME)
 
 $(NAME): $(OBJS_UTILITIES) $(OBJS) $(LIBFT_DIR)/libft.a $(PRINTF_DIR)/libftprintf.a
+	@printf "$(BLUE)[💭] push_swap compiling$(RESET)\n"
 	@$(CC) $(CFLAGS) -o $@ $^
-	@printf "push_swap compiled ✅\n"
+	@printf "$(GREEN)[✅] push_swap compiled$(RESET)\n"
 
 $(LIBFT_DIR)/libft.a:
+	@printf "$(BLUE)[💭] libft compiling$(RESET)\n"
 	@make -sC $(LIBFT_DIR)
+	@printf "$(GREEN)[✅] libft compiled$(RESET)\n"
 
 $(PRINTF_DIR)/libftprintf.a:
+	@printf "$(BLUE)[💭] libftprintf compiling$(RESET)\n"
 	@make -sC $(PRINTF_DIR)
-
-.c.o:
-	@$(CC) $(CFLAGS) -c $< -o $@
-	@printf "."
+	@printf "$(GREEN)[✅] libftprintf compiled$(RESET)\n"
 
 clean:
+	@printf "$(BLUE)[🧹] cleaning$(RESET)\n"
 	@make fclean -sC $(LIBFT_DIR)
 	@make fclean -sC $(PRINTF_DIR)
 	@rm -f $(OBJS_UTILITIES)
 	@rm -f $(OBJS)
-	@printf "cleaned 🧹\n"
+	@printf "$(GREEN)[✨] cleaned$(RESET)\n"
 
 fclean: clean
 	@rm -f $(NAME)
+	@printf "$(GREEN)[✨] fully cleaned$(RESET)\n"
+
+.c.o:
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 re: fclean all
 
