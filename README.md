@@ -1,4 +1,4 @@
-# 🍝 Philosopher
+# ↔️ Push_swap
 
 Welcome to the repo of 42 project “push_swap”. 👋 
 
